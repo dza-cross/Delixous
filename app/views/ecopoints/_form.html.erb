@@ -1,0 +1,42 @@
+<%= form_with(model: ecopoint, local: true) do |form| %>
+  <% if ecopoint.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ecopoint.errors.count, "error") %> prohibited this ecopoint from being saved:</h2>
+
+      <ul>
+        <% ecopoint.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <% @categories.each do |category| %>
+
+      <%= form.check_box :category_id %> <%= category.name %>
+      <% end %>
+
+  </div>
+
+
+
+  <div class="field">
+    <%= form.label :address_id %>
+
+
+      <%= collection_select(:ecopoint, :address_id, @addresses, :id, :bairro,{include_blank:"Selecione o local"}) %>
+    
+ 
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
